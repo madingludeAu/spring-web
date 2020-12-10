@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
     <!-- 扫描注解，这样com.xjt包下的文件都能被扫描 -->
     <context:component-scan base-package="com.my"/>
@@ -25,4 +25,13 @@
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <!--拦截器拦截强制登陆 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/*" />
+            <mvc:exclude-mapping path="/user/"/>
+            <bean class="com.my.interceptor.WebInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
